@@ -1,0 +1,32 @@
+os.File  file是个结构体
+=============================读文件===========================
+打开文件,返回的是指针类型
+os.Open(name string)(file *file ,err error)
+
+关闭
+File.Close()
+
+读取文件的内容并显示到终端（带缓冲区的方式）
+os.Open, file.Close,bufio.NewReader(),reader.ReadString
+
+读取文件内容显示在终端（使用ioutil一次将整个文件读入到内存）这种方式适用于文件不大的情况
+ioutil.ReadFile()
+
+===========================写文件==================================
+file,err := os.OpenFile(filePath,os.O_CREATE|os.O_WRONLY,0666)
+writer := bufio.NewWriter(file) //带缓冲区的
+writer.WriteString(str)
+writer.Flush()   //刷新到磁盘
+
+os.O_CREATE 创建
+os.O_WRONLY 写
+os.O_TRUNC 清空覆盖
+os.O_APPEND 追加
+os.O_RDWR 读写
+
+============================判断文件或文件夹是否存在==================
+os.Stat()
+如果返回的错误为nil，说明文件或文件夹存在
+如果返回的错误类型使用os.isNotExist()判断为true，说明文件或文件夹不存在
+如果返回的错误为其他类型，则不确定是否存在
+

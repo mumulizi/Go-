@@ -1,0 +1,35 @@
+多态
+	一种事物的多种形态，都可以按照统一的接口进行操作
+	
+类型断言
+	由于接口是一般类型，不知道具体类型，如果要转成具体类型，可以采用以下方式转换
+	var t int
+	var x interface{}
+	x = t
+	y = x.(int)    //y,ok=x.(int)  ,ok是检查的
+	
+空接口
+	.interface{}
+	空接口没有任何方法，所以所有类型都实现了空接口
+	
+	
+反射：可以在运行时动态获取变量的相关信息
+	import "reflect"
+	
+	reflect.TypeOf 获取变量的类型
+	reflect.ValueOf 获取变量的值
+	reflect.Value.Kind 获取变量类别
+	reflect.Value.Interface() 转换成intface{}类型
+	Elem()用来获取指针指向的变量
+	
+	v := reflect.ValueOf(x) v是x的一个拷贝，修改v，x不会修改
+	num := val.NumField()  //去获取多少个字段。Name Age Score sex
+	numMethod := val.NumMethod()  //去获取多少个方法。Set
+	reflect.Value.method(n).Call 调用结构体中的方法
+	
+	val := reflect.ValueOf(b)
+	num := val.NumField()  //去获取多少个字段。Name Age Score sex
+	for i :=0 ;i <num; i++{
+		fmt.Printf("numfiled %d %v\n",i,val.Field(i).Kind()) //获取字段类型，去掉kind获取字段具体的值
+	}
+	val.Elem().Field(0).SetString("stu10086")  //修改字段的值

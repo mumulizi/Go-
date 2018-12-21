@@ -1,0 +1,54 @@
+new和make的区别
+闭包
+数组与切片
+	数组：是同一种数据类型的固定长度的序列
+	数组定义：var a[len]int 比如 var [5]int
+	长度是数组类型的一部分，因此，var[5] int 和var a[10]int是不同的类型
+	数组可以通过下标进行访问，下标是从0开始，最后一个是len-1
+	数组初始化 var a [5]int = [5]int{1,2,3,4,5}
+	           var a = [5]int{1,2,3,4,5}
+			   var a = [...]int{1,3,4,56,7,7,6,3}
+			   var a = [5]string{2:"hello",4:"wold"} //指定下标初始化
+			   
+	切片是数组的一个引用，因此切片是引用类型
+	切片的长度可以改变，因此切片是一个可变数组
+	切片遍历方式和数组一样，可以用len()求长度
+	cap可以求出slice最大的容量，0<= len(slice)<=cap(arry),期中arry是slice引用的数组
+	切片的定义：var 变量名 []类型,比如 var str []string var arr []int
+	
+	切片初始化：
+		var slice []int = arr[start:end]  //start和end是下标，包含start不包含end
+		如果要 切片最后一个元素去掉  Slice = slice[:len(slice)-1]
+	通过make创建切片
+	    var slice []type = make([]type,len)
+		slice := make([]type,len)
+		slice := make([]type,len,cap)
+		
+		
+字符串转数组
+	s := "hello world"
+	s1 := []rune(s)   //字符串转数组，rune可以处理中文
+	s1[1] ='0'        //通过转换成数组修改字符串
+	str := string(s1)    //数组在转会成字符串
+	
+	
+排序
+	数字排序sort.Ints(a[:])
+	字母排序sort.Strings(s[:])
+查找
+	数字查找index := sort.SearchInts(a[:],2)    //查找前先排序a是有序的
+
+	
+map数据结构，可以理解成py的字典,使用make初始化
+	var a map[keytype]valuetype
+	
+	
+	
+包
+	线程同步
+	go build -race 然后运行的时候可以看见竞争关系
+		1、import("sync")
+		2、互斥锁 var mu sync.Mutex    读少写多使用
+		3、读写锁 var mu sync.RWMutex  读多写少使用
+	
+	

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.Title}}</title>
+</head>
+<body>
+    {{if gt .Age 18}}
+    <h1>my name is :{{ .Name}},I'm Old. Age is:{{.Age}}</h1>
+    {{else}}
+    <h1>my name is :{{ .Name}},I'm Young Age is:{{.Age}}</h1>
+    {{end}}
+    </body>
+</html>

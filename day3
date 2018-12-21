@@ -1,0 +1,90 @@
+1、strings和strconv使用
+	1、strings.HasPrefix(s string, prefix string) 
+	判断字符串s是否已prefix开头，是返回true，
+	2、stings.HasSuffix(s string, suffix string) 
+	判断字符串s是否以suffix结尾
+	3、strings.Index(s string, str string) 
+	判断str在s中首次出现的位置，如果没有出现，则返回-1
+	4、strings.LastIndex(s string, str string) 
+	判断str在s中最后出现的位置，如果没有出现，则返回-1
+	5、strings.Replace(str string, old string, new string, n int)
+    字符串替换 n是替换多少次-1是全部
+    6、strings.Count(str string, substr string) int
+    字符串计数
+    7、strings.Repeat(str string, count int)string
+	重复count次str
+	8、string.ToLower(str string)string
+	转为小写
+	9、strings.ToUpper(str string)string
+	转为大写
+	10、去掉首尾空格
+	strings.TrimSpace(" ab ") ==>"ab"
+	11、去掉首尾某些字
+	strings.Trim("abaabbddba","ab") 去掉首尾ab ==>aabbdd
+	12、去掉字符串首某字符
+	strings.TrimLeft("aaddvvaa","aa")  ==>ddvvaa
+	
+	string.Fields(str)     //str内的字符以空格切分成列表
+    li := string.Split(str,"l") //str内的字符以l切分成列表	
+    string.Join(li,"l")         //li列表以拼接每个元素加l	
+	
+	strconv.Itoa(1000)    //数字转字符串
+	n,err := strconv.Atoi("1000")  //字符串转数字,如果不想要err那就把err替换成_
+    if err != nil{
+	    fmt.Prtlin("xxxxxx",err)
+	}
+	
+	
+time包
+    now := time.Now()   //获取当前时间
+    time.Now().Day()  time.Now().Minute() time.Now().Month() time.Now().Year()
+	time.Duration  //纳秒
+	fmt.Println(now.Format("2006/1/02 15:04:05"))  //格式化时间，必须用这几个数字，可以去掉几点，格式年月日
+    
+	start := time.Now().UnixNano()
+	test()
+	end := time.Now().UnixNano()
+	
+	
+指针类型
+    普通类型，变量存的就是值，也叫值类型
+    获取变量的地址用&
+	指针类型，变量存的是一个地址，这个地址存的才是值
+    获取指针类型所执行的值，使用 * 
+	func main()  {
+		var a int = 10
+		fmt.Println(&a)    //打印a的内存地址
+
+		var p *int         //p定义成指针
+		p = &a             //p的指针内存地址，指到a的内存地址上
+		*p =200            //把内存地址对应的值改成200
+		fmt.Println(*p)    //取出指针p所指向的值
+		fmt.Println(a)     //a的值也变了
+	}
+	
+	
+for range
+		用来遍历数组、slice、map、chan
+		func main() {
+			str := "hello world 中国"
+
+			for i ,v := range str{
+				//fmt.Printf("%T\n",v)
+				fmt.Printf("i[%d], v[%c] len[%d]\n",i,v,len([]byte(string(v))))
+			}
+		}
+
+	
+函数可变参数
+	func add(arg...int)int{}  //0个或多个参数，通过len(arg)，来判断参数个数
+
+函数的传递方式
+	1、值传递
+	2、引用传递
+	注意：无论是值传递，还是引用传递，传递给函数的都是变量的副本，不过，值传递是值的拷贝。
+		  引用传递是地址的拷贝，一般来说，地址拷贝更高效，而值拷贝取决于拷贝对象的大小。
+		  
+defer用途：
+    1、当函数返回时，执行defer语句，因此可以做资源清理、关闭文件句柄、锁资源释放、数据库连接释放
+	2、多个defer语句，按先进后出的方式执行
+	3、defer语句中的变量，在derfer声明时就决定了

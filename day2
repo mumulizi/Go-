@@ -1,0 +1,37 @@
+每个源文件都可以包含一个init函数，这个init函数自动被go运行框架调用
+引用包添加别名 import (a "aaaa") 把aaaa包别名为a
+包只初始化，不引用  import(_ "aaaa") 只引用aaaa的包做初始化使用
+
+函数
+	func 函数名(参数列表)(返回值列表){}
+
+常量
+    const，只读不可修改
+    const (
+	    a=0
+		b=1
+	)
+	
+变量
+	var identifier type
+	var(
+	a int   //默认为0
+	b sting  //默认为“”
+	c bool   //默认为false
+	d int =8
+	)
+	
+	
+值类型：变量直接存储值，内存通常在栈中分配
+		基本数据类型： int/float/bool/string/数组/struct
+引用类型：变量存储的是一个地址，这个地址存储最终的值。内存通常在堆上分配，通过GC回收
+		指针、slice、map、chan等都是引用类型
+
+切片
+str string = "hello world"
+s := str[10] //切出来的是d对应的asscii码
+s := str[10:11] //切出来的是具体的字符d 
+s := fmt.Sprintf("%c",str[10]) //根据切出来的asscii码，格式化成对应的字母
+
+fmt.Scanf("%d",&n)    //&是指针，指向n的内存地址 解释见day2的作业，day3第一课
+//fmt.Scanf("%d\n",&save_money) //使用scanf必须加\n不然会打印两次，https://studygolang.com/topics/59 参考ATM练习例子
