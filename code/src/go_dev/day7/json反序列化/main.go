@@ -7,7 +7,7 @@ import (
 
 
 type User struct {
-	Name string
+	Name string `json:"name"`
 	NickName string
 	Age int
 	Phone string
@@ -28,6 +28,7 @@ func testStruct() (ret string, err error) {
 		return
 	}
 	ret = string(data)
+	fmt.Println(ret)
 	return
 }
 
@@ -51,5 +52,6 @@ func test() {
 
 func main() {
 	test()
+	testStruct()
 
 }

@@ -30,8 +30,6 @@ func CopyFile(src string,dst string) error {
 	}
 	return err
 
-
-
 }
 func main() {
 	var (

@@ -24,4 +24,5 @@ func main() {
 	case <-t.C:
 		fmt.Println("timeout")
 	}
+	t.Stop()
 }

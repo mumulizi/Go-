@@ -1,0 +1,11 @@
+os.args 获取命令行参数
+
+flag包的使用，用来解析命令行参数，具体使用参考day7,example5的例子
+flag.BoolVar()
+flag.StringVar()
+flag.IntVar()
+
+json
+1:导入包：encoding/json
+2:序列号  json.Marshal(data interface{})  //转成json类型
+3:反序列化 json.UnMarshal(data []byte,v interface{})  //由json类型转成其他

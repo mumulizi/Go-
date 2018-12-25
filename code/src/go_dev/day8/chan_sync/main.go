@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 )
-
+//exitChan没有close为什么？参考chan_close例子里的解释
 func calcChan(taskChan,resChan chan int,exitChan chan bool)  {
 	for v := range taskChan{
 		flag := true
@@ -24,12 +24,12 @@ func calcChan(taskChan,resChan chan int,exitChan chan bool)  {
 
 func main() {
 	t1 :=  time.Now()
-	intChan := make(chan int,100000)
-	resultChan := make(chan int,100000)
+	intChan := make(chan int,100)
+	resultChan := make(chan int,100)
 	exitChan := make(chan bool,8)
 
 	go func() {
-		for i :=0 ;i<100000; i++{
+		for i :=0 ;i<100; i++{
 			intChan <- i
 		}
 	close(intChan)

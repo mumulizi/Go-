@@ -1,0 +1,36 @@
+Goroutine
+	go1.8之前要设置goroutine运行在哪个核上，1.8以后不用设置了
+		num := runtime.NumCPU()  //拿到cpu核数
+		runtime.GOMAXPROCS(num)  //运行在哪个核上
+		fmt.Println(num)
+	
+    不同goroutine之间通信
+		1：全局变量和锁同步
+		2：Channel
+	channle概念
+		1：类似unix中的管道pipe
+		2：先进先出
+		3：线程安全，多个goroutine同时访问，不需要加锁
+		4：channel是有类型的，一个整数的channel只能存放整数
+	channel生命
+		var 变量名 chan 类型
+	channel基本操作
+		1:从channel读取数据
+			var testChan chan int
+			testChan = make(chan int , 10)
+			var a int
+			a = <- testChan
+		2:从channel写入数据
+			var testChan chan int
+			testChan = make(chan int,10)
+			var a int = 10
+			testChan <- 10
+			
+	channle select 
+		解决阻塞的问题
+	goroute出现panic 用recover捕获
+	
+	
+单元测试
+	1：文件名必须以 _test.go结尾
+	2：函数名字必须以Testxxx开头
