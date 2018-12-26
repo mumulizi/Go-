@@ -10,3 +10,35 @@ Tcp编程
 		buf := make([]byte,1024) //创建一个切片
 		n,err := conn.Read(buf) //从conn读取，等待conn发送消息，如果没发送消息，就堵在这
 		fmt.print(string(buf[:n]))  //显示客户端发送的内容到服务器
+
+		
+redis
+	导入包
+	"github.com/garyburd/redigo/redis"
+	//连接redis
+	c,err := redis.Dial("tcp","172.16.100.17:6379")
+	//延迟关闭
+	defer c.Close()
+	//插入数据
+	_,err = c.Do("set","name","大煞笔SB")
+	//读取数据，返回的是字符串
+	ret, err := redis.String(c.Do("Get","name"))
+	
+	
+	//批量Hash插入，读取
+	_ , err = conn.Do("HMSet","user01","name","alex","age",20)
+	r,err := redis.Strings(conn.Do("HMGet","user01","name","age"))
+	
+	//对list操作
+	_,err := c.Do("lpush","aList","no1apple",30,"no2banana",40)
+	r,err := redis.String(c.Do("rpop","aList"))
+	
+	
+	
+	连接池
+		1：实现初始化一定数量的连接，放入到连接池
+		2：当go需要操作redis时，直接从redis连接池取连接即可
+		3：这样可以节省临时获取redis连接的时间，从而提高效率
+		
+		
+		
