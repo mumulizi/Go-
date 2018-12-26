@@ -1,0 +1,12 @@
+Tcp编程
+	服务端											客户端
+	1:监听											1：连接服务端
+	listen,err := net.Listen("tcp","IP地址:端口")		conn,err := net.Dial("tcp","服务端IP:端口")
+	2：等待客户端连接								2：准备发送数据
+	conn,err := listen.Accept()							reader := bufio.NewReader(os.stdin) //获取终端标准输入
+														line,err := reader.ReadString('\n') //从终端读取一行数据
+														n,err := conn.Write([]byte(line))   //发送数据到服务器端
+	3：接收客户端数据
+		buf := make([]byte,1024) //创建一个切片
+		n,err := conn.Read(buf) //从conn读取，等待conn发送消息，如果没发送消息，就堵在这
+		fmt.print(string(buf[:n]))  //显示客户端发送的内容到服务器
