@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-var UserID int
+var UserId int
 var UserPwd string
 func main() {
 	var key int
@@ -30,12 +30,10 @@ func main() {
 
 	if key == 2{
 		fmt.Println("输入用户名：")
-		fmt.Scanf("%d\n",&UserID)
+		fmt.Scanf("%d\n",&UserId)
 		fmt.Println("输入密码：")
 		fmt.Scanf("%s\n",&UserPwd)
-		err := login(UserID,UserPwd)
-		if err !=nil{
-			fmt.Println("登录失败")
-		}
+		login(UserId,UserPwd)
+
 	}
 }
