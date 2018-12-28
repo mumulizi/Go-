@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"go_dev/FuckQQ/common/message"
+	"go_dev/FuckQQ/server/model"
 	"go_dev/FuckQQ/server/utils"
 	"net"
 )
@@ -23,12 +24,22 @@ func (this *UserProcess)ServerProcesslogin(mes *message.Message)(err error) {
 	var resMes message.Message
 	resMes.Type = message.LoginResMesType
 	var loginResMes message.LoginResMes
-	if loginMes.UserId == 100 && loginMes.UserPwd =="123456"{
-		loginResMes.Code =200
-	}else {
+
+	//使用redis内的数据验证用户登录是否正确
+	user,err :=model.MyUserDao.Login(loginMes.UserId,loginMes.UserPwd)
+	if err !=nil{
 		loginResMes.Code = 500
-		loginResMes.Error = "user not found ,please register"
+		loginResMes.Error = "用户不存在，请注册"
+	}else {
+		loginResMes.Code =200
+		fmt.Println(user.UserName,"登录成功")
 	}
+	//if loginMes.UserId == 100 && loginMes.UserPwd =="123456"{
+	//	loginResMes.Code =200
+	//}else {
+	//	loginResMes.Code = 500
+	//	loginResMes.Error = "user not found ,please register"
+	//}
 	data ,err := json.Marshal(loginResMes)
 	if err !=nil{
 		fmt.Println("json unmarsha err:",err)

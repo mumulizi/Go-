@@ -4,8 +4,8 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	"go_dev/FuckQQ/client/utils"
 	"go_dev/FuckQQ/common/message"
-	"go_dev/FuckQQ/server/utils"
 	"net"
 )
 
@@ -74,12 +74,13 @@ func (this *UserProcess)Login(UserId int, UserPwd string)(err error){
 	var loginResMes message.LoginResMes
 	err = json.Unmarshal([]byte(mes.Data),&loginResMes)
 	if loginResMes.Code ==200{
-		fmt.Println("登录成功")
-	}else {
+		go serverProcessMes(conn)
+		for{
+			ShowMenu()
+		}
+	}else if loginResMes.Code==500{
 		fmt.Println(loginResMes.Error)
 	}
-
-
 	return
 }
 

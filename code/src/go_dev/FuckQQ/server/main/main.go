@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"go_dev/FuckQQ/server/model"
 	"net"
+	"time"
 )
 //func writePkg(conn net.Conn,data []byte) (err error){
 //	var pkgLen uint32
@@ -123,8 +125,18 @@ func process(conn net.Conn) {
 	}
 }
 
+//添加一个函数，完成UserDao的初始化任务
+func initUserDao() {
+	 model.MyUserDao = model.NewUserDao(pool)
+}
+
+
 func main() {
 	fmt.Println("服务器开始监听8889端口")
+	//当服务启动的时候初始化redis连接池
+	initPool("172.16.100.17:6379",16,0,100*time.Second)
+	initUserDao()
+
 	listen, err := net.Listen("tcp","0.0.0.0:8889")
 	defer listen.Close()
 	if err != nil{

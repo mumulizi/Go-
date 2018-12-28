@@ -2,7 +2,7 @@ package process
 
 import (
 	"fmt"
-	"go_dev/FuckQQ/server/utils"
+	"go_dev/FuckQQ/client/utils"
 	"net"
 	"os"
 )
